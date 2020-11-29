@@ -1,4 +1,5 @@
 import React, { useEffect, useState } from 'react';
+import mobilenetDemo, * as mobileNet from './mobilenet-index';
 
 const MarsImages = () => {
 
@@ -37,7 +38,12 @@ const MarsImages = () => {
 
                 ))} */}
                 {images.map(image => (
-                    <img key={image.id} src={image.img_src} />
+                    <div>
+                        <img key={image.id} src={image.img_src} id="mars" crossOrigin="anonymous" width="224" height="224" />
+                        <div id="status"></div>
+                        <div id="predictions"></div>
+                        <mobilenetDemo />
+                    </div>
                 ))}
             </>
 
