@@ -1,21 +1,31 @@
 import React, { useEffect, useState, useRef } from 'react';
-import mobilenetDemo, * as mobileNet from './mobilenet-index';
+import Utils from './utils';
+import * as tf from "@tensorflow/tfjs";
+
 
 
 const MarsImage = (props) => {
 
+    const { imageSource } = props;
     const photo = useRef();
-    //photos are passed to this child component from the parent that makes the API call 
-    const { photos } = props;
-
     const [image, setImage] = useState();
+    const [status, setStatus] = useState();
     const [classes, setClasses] = useState([]);
+    const IMAGE_SIZE = 224;
+    const TOPK_PREDICTIONS = 10;
+    const MOBILENET_MODEL_PATH =
+        'https://storage.googleapis.com/tfjs-models/tfjs/mobilenet_v1_0.25_224/model.json';
+
+    let mobilenet;
+    (async () => {
+        mobilenet = await tf.loadLayersModel(MOBILENET_MODEL_PATH);
+    })();
 
     async function predict(imgElement) {
+
         setStatus("Predicting...");
         // const startTime1 = performance.now();
         // let startTime2;
-
         const logits = tf.tidy(() => {
             // tf.browser.fromPixels() returns a Tensor from an image element.
             const img = tf.browser.fromPixels(imgElement).toFloat();
@@ -31,48 +41,22 @@ const MarsImage = (props) => {
             // Make a prediction through mobilenet.
             return mobilenet.predict(batched);
         });
-        setClasses(await getTopKClasses(logits, TOPK_PREDICTIONS));
+        //setClasses(await Utils.getTopKClasses(predict.logits, TOPK_PREDICTIONS));
     }
-
-    async function getTopKClasses(logits, topK) {
-        const values = await logits.data();
-        const valuesAndIndices = [];
-        for (let i = 0; i < values.length; i++) {
-            valuesAndIndices.push({ value: values[i], index: i });
-        }
-        valuesAndIndices.sort((a, b) => {
-            return b.value - a.value;
-        });
-        const topkValues = new Float32Array(topK);
-        const topkIndices = new Int32Array(topK);
-        for (let i = 0; i < topK; i++) {
-            topkValues[i] = valuesAndIndices[i].value;
-            topkIndices[i] = valuesAndIndices[i].index;
-        }
-        const topClassesAndProbs = [];
-        for (let i = 0; i < topkIndices.length; i++) {
-            topClassesAndProbs.push({
-                className: IMAGENET_CLASSES[topkIndices[i]],
-                probability: topkValues[i],
-            });
-        }
-        return topClassesAndProbs;
-    }
-
-
-
 
     useEffect(async () => {
         setImage(photos[0].img_src)
+        setClasses(await Utils.getTopKClasses(predict.logits, TOPK_PREDICTIONS));
         await predict(photo)
     }, [])
 
     return (
         <div>
-            <img ref={useRef} src={image} />
+            <div>{status}</div>
+            <img ref={photo} src={imageSource} />
+            <div>{classes}</div>
         </div>
     )
 }
-
 
 export default MarsImage;

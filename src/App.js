@@ -1,12 +1,13 @@
 import logo from './logo.svg';
 import './App.css';
-import MobileNetPredictionTakeTwo from './MobileNetPredictionTakeTwo';
+import MobileNetPredictionTakeTwo from './ImageLoader';
+import ImageLoader from './ImageLoader';
 
 const App = () => {
 
   return (
     <div className="App">
-      <MobileNetPredictionTakeTwo />
+      <ImageLoader />
     </div>
   );
 }
