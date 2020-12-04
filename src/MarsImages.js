@@ -1,6 +1,8 @@
 import React, { useEffect, useState } from 'react';
 import mobilenetDemo, * as mobileNet from './mobilenet-index';
 
+import MobileNetPredictions from './MobileNetPredictions';
+
 const MarsImages = () => {
 
     const [error, setError] = useState(null);
@@ -31,18 +33,13 @@ const MarsImages = () => {
     } else {
         return (
             <>
-                {/* {images.map(image => (
-                    <div key={image.id}>
-                        {image.id}
-                    </div>
-
-                ))} */}
                 {images.map(image => (
                     <div>
-                        <img key={image.id} src={image.img_src} id="mars" crossOrigin="anonymous" width="224" height="224" />
-                        <div id="status"></div>
+                        {/* <img key={image.id} src={image.img_src} id="mars" crossOrigin="anonymous" width="224" height="224" /> */}
+                        <MobileNetPrediction imageData={image} />
+                        {/* <div id="status"></div>
                         <div id="predictions"></div>
-                        <mobilenetDemo />
+                        <mobilenetDemo /> */}
                     </div>
                 ))}
             </>

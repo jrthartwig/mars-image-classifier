@@ -20,7 +20,7 @@ const mobilenetDemo = async () => {
     // value of `predict`.
     mobilenet.predict(tf.zeros([1, IMAGE_SIZE, IMAGE_SIZE, 3])).dispose();
 
-    status('');
+    status('test');
 
     // Make a prediction through the locally hosted cat.jpg.
     const marsElement = document.getElementById('mars');
@@ -145,31 +145,8 @@ function showResults(imgElement, classes) {
         predictionContainer, predictionsElement.firstChild);
 }
 
-// const filesElement = document.getElementById('files');
-// filesElement.addEventListener('change', evt => {
-//     let files = evt.target.files;
-//     // Display thumbnails & issue call to predict each image.
-//     for (let i = 0, f; f = files[i]; i++) {
-//         // Only process image files (skip non image files)
-//         if (!f.type.match('image.*')) {
-//             continue;
-//         }
-//         let reader = new FileReader();
-//         reader.onload = e => {
-//             // Fill the image & call predict.
-//             let img = document.createElement('img');
-//             img.src = e.target.result;
-//             img.width = IMAGE_SIZE;
-//             img.height = IMAGE_SIZE;
-//             img.onload = () => predict(img);
-//         };
-
-//         // Read in the image file as a data URL.
-//         reader.readAsDataURL(f);
-//     }
-// });
-
 const demoStatusElement = document.getElementById('status');
+
 const status = msg => demoStatusElement.innerHTML = msg;
 
 const predictionsElement = document.getElementById('predictions');

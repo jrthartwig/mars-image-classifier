@@ -1,12 +1,12 @@
 import logo from './logo.svg';
 import './App.css';
-import MarsImages from './MarsImages';
+import MobileNetPredictionTakeTwo from './MobileNetPredictionTakeTwo';
 
 const App = () => {
 
   return (
     <div className="App">
-      <MarsImages />
+      <MobileNetPredictionTakeTwo />
     </div>
   );
 }
