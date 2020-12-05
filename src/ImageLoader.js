@@ -45,8 +45,7 @@ const ImageLoader = () => {
                         {/* {images && images.map((image) => {
                             <MarsImage src={image[0].img_src} />
                         })} */}
-                        {/* <MarsImage src={images[0].img_src} /> */}
-                        hi
+                        <MarsImage src={images[0].img_src} />
                     </div>
                 </div>
             </div>

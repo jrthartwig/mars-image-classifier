@@ -46,8 +46,8 @@ const MarsImage = (props) => {
 
     useEffect(async () => {
         setImage(photos[0].img_src)
-        setClasses(await Utils.getTopKClasses(predict.logits, TOPK_PREDICTIONS));
         await predict(photo)
+        setClasses(await Utils.getTopKClasses(predict.logits, TOPK_PREDICTIONS));
     }, [])
 
     return (
