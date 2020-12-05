@@ -50,19 +50,11 @@ const ImageLoader = () => {
     return <div>Loading...</div>;
   } else {
     return (
-      (images && mobilenet && (
+      (mobilenet && images && (
         <div>
-          <div>
-            <div>
-              {/* {images && images.map((image) => {
-                            <MarsImage src={image[0].img_src} />
-                        })} */}
-              <MarsImage
-                mobilenet={mobilenet}
-                imageSource={images[0].img_src}
-              />
-            </div>
-          </div>
+          {images.map((i, k) => (
+            <MarsImage key={k} mobilenet={mobilenet} imageSource={i.img_src} />
+          ))}
         </div>
       )) ||
       null
