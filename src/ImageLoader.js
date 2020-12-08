@@ -22,7 +22,7 @@ const ImageLoader = () => {
 
   useEffect(async () => {
     fetch(
-      "https://api.nasa.gov/mars-photos/api/v1/rovers/curiosity/photos?sol=1000&page=2&api_key=cPmB3PNZCJGbJ8YYWhA7m8hbYu0z4yqxSoai7cu1"
+      "https://api.nasa.gov/mars-photos/api/v1/rovers/spirit/photos?sol=100&camera=NAVCAM&api_key=cPmB3PNZCJGbJ8YYWhA7m8hbYu0z4yqxSoai7cu1"
     )
       .then((res) => res.json())
       .then(
